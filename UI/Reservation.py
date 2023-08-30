@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
+import mysql.connector
 
 
 root = Tk ()
@@ -10,6 +11,35 @@ def button_clear():
     a = 10
     return a
 
+
+def Save(Name, DOB, PhoneNo, Email, Address):
+    dbconnection = mysql.connector.connect (host = 'localhost', username = 'root', password = 'admin', database = 'class_xii_project')
+    dbcursor = dbconnection.cursor()
+
+    
+    InsertQuery = "insert into personal (Name, DOB, Mobile, Email, Address) values ('" + Name + "', '" + DOB + "', '" + PhoneNo + "', '" + Email + "', '" + Address + "')"
+    
+    dbcursor.execute (InsertQuery)
+    dbconnection.commit()
+
+
+    Msg = Name + ', your reservation has been confirmed.' + '\n \n' + 'Your registration number is: ' + str(dbcursor.lastrowid)
+    messagebox.showinfo('Confirmation', Msg)
+    
+def GetValues():
+    Name = txtName.get()
+    DOB = txtDOB.get()
+    PhoneNo = txtMoblie.get()
+    Email = txtEmail.get()
+    Address = txtAddress.get()
+
+    Dates = txtDates.get()
+    Days = txtDays.get()
+    #Boarding = dropBoarding.get()
+    #Leaving = dropLeaving.get()
+    Members = txtMembers.get()
+    
+    Save(Name, DOB, PhoneNo, Email, Address)
     
 def CreateLabel(container, caption, r, c):
     label = Label (container, text = caption)
@@ -81,39 +111,10 @@ frameAction.grid(row = 2, column = 0, padx = 20, pady = 20)
 btnClear = Button (frameAction, text = 'Clear', command = button_clear)
 btnClear.grid(row = 0, column = 0)
 
-def button_submit():
-    Name = txtName.get()
-    DOB = txtDOB.get()
-    PhoneNo = txtMoblie.get()
-    Email = txtEmail.get()
-    Address = txtAddress.get()
-
-    Dates = txtDates.get()
-    Days = txtDays.get()
-    #Boarding = dropBoarding.get()
-    #Leaving = dropLeaving.get()
-    Members = txtMembers.get()
-    
-    Personal = Name + '\n' + DOB + '\n' + PhoneNo + '\n' + Email + '\n' + Address + '\n'
-
-    Reservation = Dates + '\n' + Days + '\n' + Members
-    
-    Msg = Personal + Reservation
-    messagebox.showinfo("Confirmation", Msg)
     
     
-btnSubmit = Button (frameAction, text = 'Submit', command = button_submit)
+btnSubmit = Button (frameAction, text = 'Submit', command = GetValues)
 btnSubmit.grid(row = 0, column = 1)
-
-
-'''messagebox.showinfo("showinfo", "Information")
-messagebox.showwarning("showwarning", "Warning")
-messagebox.showerror("showerror", "Error")
-messagebox.askquestion("askquestion", "Are you sure?") 
-messagebox.askokcancel("askokcancel", "Want to continue?")
-messagebox.askyesno("askyesno", "Find the value?")
-messagebox.askretrycancel("askretrycancel", "Try again?")'''
-
 
 
 root.mainloop()
