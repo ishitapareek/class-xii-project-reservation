@@ -10,10 +10,6 @@ def button_clear():
     a = 10
     return a
 
-
-def CreateTextbox(container, txtname, r, c):
-    txtbox = Entry (container, name = txtname)
-    txtbox.grid (row = r, column = c)
     
 def CreateLabel(container, caption, r, c):
     label = Label (container, text = caption)
@@ -23,30 +19,41 @@ framePersonalInfo = LabelFrame(root, text = 'Personal Info', padx = 7, pady = 10
 framePersonalInfo.grid(row = 0, column = 0, padx = 20, pady = 20)
 
 CreateLabel (framePersonalInfo, 'Name: ', 0, 0)
-Name = CreateTextbox (framePersonalInfo, 'txtName', 0, 1)
+txtName = Entry (framePersonalInfo)
+txtName.grid (row = 0, column = 1)
+
 
 CreateLabel (framePersonalInfo, 'Date of Birth: ', 0, 2)
-CreateTextbox (framePersonalInfo, 'txtDOB', 0, 3)
+txtDOB = Entry (framePersonalInfo)
+txtDOB.grid (row = 0, column = 3)
+
 
 CreateLabel (framePersonalInfo, 'Phone Number: ', 1, 0)
-CreateTextbox (framePersonalInfo, 'txtMoblie', 1, 1)
+txtMoblie = Entry (framePersonalInfo)
+txtMoblie.grid (row = 1, column = 1)
+
 
 CreateLabel (framePersonalInfo, 'Email: ', 1, 2)
-CreateTextbox (framePersonalInfo, 'txtEmail', 1, 3)
+txtEmail = Entry (framePersonalInfo)
+txtEmail.grid (row = 1, column = 3)
+
 
 CreateLabel (framePersonalInfo, 'Address: ', 2, 0)
-CreateTextbox (framePersonalInfo, 'txtAddress', 2, 1)
+txtAddress = Entry (framePersonalInfo)
+txtAddress.grid (row = 2, column = 1)
 
 
 frameReservationInfo = LabelFrame (root, text = 'Reservation', padx = 7, pady = 10)
 frameReservationInfo.grid(row = 1, column = 0, padx = 20, pady = 20)
 
-
 CreateLabel (frameReservationInfo, 'Dates: ', 0, 0)
-CreateTextbox (frameReservationInfo, 'txtDates', 0, 1)
+
+txtDates = Entry (frameReservationInfo)
+txtDates.grid (row = 0, column = 1)
 
 CreateLabel (frameReservationInfo, 'Days: ', 0, 2)
-CreateTextbox (frameReservationInfo, 'txtDays', 0, 3)
+txtDays = Entry (frameReservationInfo)
+txtDays.grid (row = 0, column = 3)
 
 clickedBoarding = StringVar()
 clickedLeaving = StringVar()
@@ -65,7 +72,8 @@ dropLeaving.grid(row = 1, column = 3)
 
 
 CreateLabel (frameReservationInfo, 'Number of Group Members: ', 2, 0)
-CreateTextbox (frameReservationInfo, 'txtEmail', 2, 1)
+txtMembers = Entry (frameReservationInfo)
+txtMembers.grid (row = 2, column = 1)
 
 frameAction = LabelFrame (root, padx = 7, pady = 10)
 frameAction.grid(row = 2, column = 0, padx = 20, pady = 20)
@@ -74,10 +82,25 @@ btnClear = Button (frameAction, text = 'Clear', command = button_clear)
 btnClear.grid(row = 0, column = 0)
 
 def button_submit():
-    Name = t.get()
-    messagebox.showinfo(framePersonalInfo.get(), "Error")
-    text = Name + ", you're reservation has been confirmed."
-    messagebox.showinfo("Confirmation", text)
+    Name = txtName.get()
+    DOB = txtDOB.get()
+    PhoneNo = txtMoblie.get()
+    Email = txtEmail.get()
+    Address = txtAddress.get()
+
+    Dates = txtDates.get()
+    Days = txtDays.get()
+    #Boarding = dropBoarding.get()
+    #Leaving = dropLeaving.get()
+    Members = txtMembers.get()
+    
+    Personal = Name + '\n' + DOB + '\n' + PhoneNo + '\n' + Email + '\n' + Address + '\n'
+
+    Reservation = Dates + '\n' + Days + '\n' + Members
+    
+    Msg = Personal + Reservation
+    messagebox.showinfo("Confirmation", Msg)
+    
     
 btnSubmit = Button (frameAction, text = 'Submit', command = button_submit)
 btnSubmit.grid(row = 0, column = 1)
