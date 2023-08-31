@@ -49,9 +49,8 @@ frameButton = LabelFrame (root, padx = 7, pady = 10)
 Enter()
 
 
-link = Label(root, text="www.tutorialspoint.com", font=('Helveticabold', 15), fg="blue", cursor="hand2")
+'''link = Label(root, text="www.tutorialspoint.com", font=('Helveticabold', 15), fg="blue", cursor="hand2")
 link.grid(row = 3, column = 0)
-#link.bind("<Button-1>", lambda e:
-          #callback("http://www.tutorialspoint.com"))
+link.bind("<Button-1>", lambda e: callback("http://www.tutorialspoint.com"))'''
 
 root.mainloop()
