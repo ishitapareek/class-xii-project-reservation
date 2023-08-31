@@ -34,7 +34,6 @@ def Save(Name, DOB, PhoneNo, Email, Address, Dates, Days, Boarding, Leaving, Mem
     
     dbconnection.commit()
 
-
     messagebox.askquestion("Are You Sure?", "Do you want to confirm your reservation?")
 
     Msg = Name + ', your reservation has been confirmed.' + '\n \n ' + 'Your registration number is: ' + RegNo
