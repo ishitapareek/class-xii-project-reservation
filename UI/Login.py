@@ -17,7 +17,7 @@ def Submit():
     Password = Passwordtxt.get()
     
     if Username == 'admin' and Password == '123':
-        messagebox.showinfo ('Login', 'Reservation.py')
+        messagebox.showinfo ('Login', 'Correct Login.')
 
         
     else:
