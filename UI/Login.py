@@ -1,56 +1,47 @@
 from tkinter import *
 from tkinter import messagebox
 
+
 root = Tk()
 root.title('Login')
 
 
-def CorrectLogin():
-    messagebox.showinfo('Login','Correct Login.')
-
 def IncorrectLogin():
-    messagebox.showinfo('Login','Incorrect Login. \n Check username/password.')
-
-
+    
 def CreateLabel(container, caption, r, c):
     label = Label (container, text = caption)
     label.grid (row = r, column = c)
 
 
-def Enter():
-    Username = txtUsername.get()
-    Password = txtPassword.get()
+def Submit():
+    Username = Usertxt.get()
+    Password = Passwordtxt.get()
+    
+    if Username == 'admin' and Password == '123':
+        messagebox.showinfo ('Login', 'Reservation.py')
 
-    if Username == 'admin' and Password == 'xyz':
-        btnLogin = Button(root, text = 'Login', command = CorrectLogin)
-
+        
     else:
-        btnLogin = Button(root, text = 'Login', command = IncorrectLogin)
-
-    btnLogin.grid(row = 2, column = 0)
+        messagebox.showinfo ('Login', 'Incorrect Login. \n \n Check username/password.')
 
 
-frameLoginInfo = LabelFrame (root, text = 'Login Info', padx = 7, pady = 10)
 
-CreateLabel (root, 'Username: ', 0, 0)
 
-txtUsername = Entry (root, bd = 5)
-txtUsername.grid (row = 0, column = 1, padx = 15, pady = 5)
+CreateLabel (root, 'Username:', 0, 0)
+
+Usertxt = Entry (root)
+Usertxt.grid (row = 0, column = 1)
 
 
 CreateLabel (root, 'Password: ', 1, 0)
 
-txtPassword = Entry (root, bd = 5)
-txtPassword.grid (row = 1, column = 1, padx = 15, pady = 20, columnspan = 3)
+Passwordtxt = Entry (root, show = '*')
+Passwordtxt.grid (row = 1, column = 1)
 
 
-frameButton = LabelFrame (root, padx = 7, pady = 10)
 
-Enter()
+Submitbtn = Button (root, text = 'Submit', command = Submit)
+Submitbtn.grid (row = 2, column = 0, columnspan = 2)
 
-
-'''link = Label(root, text="www.tutorialspoint.com", font=('Helveticabold', 15), fg="blue", cursor="hand2")
-link.grid(row = 3, column = 0)
-link.bind("<Button-1>", lambda e: callback("http://www.tutorialspoint.com"))'''
 
 root.mainloop()
