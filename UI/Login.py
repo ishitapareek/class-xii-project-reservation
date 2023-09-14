@@ -6,7 +6,6 @@ root = Tk()
 root.title('Login')
 
 
-def IncorrectLogin():
     
 def CreateLabel(container, caption, r, c):
     label = Label (container, text = caption)
