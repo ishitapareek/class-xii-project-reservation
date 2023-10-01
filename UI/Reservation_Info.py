@@ -2,10 +2,6 @@ from tkinter import *
 from tkinter import ttk
 import mysql.connector
 
-root = Tk()
-root.title ('Customer Information')
-
-
 
 def Info():
     dbconnection = mysql.connector.connect (host = 'localhost', username = 'root', password = 'admin', database = 'class_xii_project')
@@ -42,25 +38,30 @@ def ColumnHeading(Text):
     myTree.column(Text, anchor = W, width = 120)
     myTree.heading(Text, text = Text, anchor = W)
 
-       
-myTree = ttk.Treeview(root)
-myTree ['columns'] = ('Name', 'Address', 'DOB', 'Email', 'Mobile', 'RegNo', 'Dates', 'Days', 'Boarding', 'Leaving', 'Members')
 
-myTree.column('#0', width = 0)
+def InfoScreen():
+    root = Tk()
+    root.title ('Customer Information')
 
-ColumnHeading('Name')
-ColumnHeading('Address')
-ColumnHeading('DOB')
-ColumnHeading('Email')
-ColumnHeading('Mobile')
-ColumnHeading('RegNo')
-ColumnHeading('Dates')
-ColumnHeading('Days')
-ColumnHeading('Boarding')
-ColumnHeading('Leaving')
-ColumnHeading('Members')
+    global myTree 
+    myTree = ttk.Treeview(root)
+    myTree ['columns'] = ('Name', 'Address', 'DOB', 'Email', 'Mobile', 'RegNo', 'Dates', 'Days', 'Boarding', 'Leaving', 'Members')
 
-Info()
+    myTree.column('#0', width = 0)
 
+    ColumnHeading('Name')
+    ColumnHeading('Address')
+    ColumnHeading('DOB')
+    ColumnHeading('Email')
+    ColumnHeading('Mobile')
+    ColumnHeading('RegNo')
+    ColumnHeading('Dates')
+    ColumnHeading('Days')
+    ColumnHeading('Boarding')
+    ColumnHeading('Leaving')
+    ColumnHeading('Members')
 
-root.mainloop() 
+    Info()
+
+    root.mainloop()
+

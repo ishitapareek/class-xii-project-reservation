@@ -1,11 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 
-
-root = Tk()
-root.title('Login')
-
-
+from Reservation_Info import *
     
 def CreateLabel(container, caption, r, c):
     label = Label (container, text = caption)
@@ -16,10 +12,10 @@ def Submit():
     Username = Usertxt.get()
     Password = Passwordtxt.get()
 
-        
     
     if Username == 'admin' and Password == '123':
         messagebox.showinfo ('Login', 'Correct Login.')
+        InfoScreen()
 
         
     else:
@@ -27,33 +23,27 @@ def Submit():
 
 
 
+def LoginScreen():
+    global Usertxt
+    global Passwordtxt
 
-'''Userbtn = StringVar()
+    
+    root = Tk()
+    root.title('Login')
 
-CreateLabel (root, 'Employee or Customer: ', 0, 0)
-Customerbtn = Radiobutton (root, text = 'Customer', variable = Breakfastbtn, value = 'Customer')
-Customerbtn.grid(row = 0, column = 1)
+    CreateLabel (root, 'Username:', 1, 0)
 
-Employeebtn = Radiobutton (frameBooking, text = 'Employee', variable = Breakfastbtn, value = 'Employee')
-Employeebtn.grid(row = 0, column = 2)
+    Usertxt = Entry (root)
+    Usertxt.grid (row = 1, column = 1)
 
-Userbtn.set(None)'''
+    CreateLabel (root, 'Password: ', 2, 0)
 
-CreateLabel (root, 'Username:', 1, 0)
+    Passwordtxt = Entry (root, show = '*')
+    Passwordtxt.grid (row = 2, column = 1)
+    
 
-Usertxt = Entry (root)
-Usertxt.grid (row = 1, column = 1)
-
-
-CreateLabel (root, 'Password: ', 2, 0)
-
-Passwordtxt = Entry (root, show = '*')
-Passwordtxt.grid (row = 2, column = 1)
-
+    Submitbtn = Button (root, text = 'Submit', command = Submit)
+    Submitbtn.grid (row = 3, column = 0, columnspan = 2)
 
 
-Submitbtn = Button (root, text = 'Submit', command = Submit)
-Submitbtn.grid (row = 3, column = 0, columnspan = 2)
-
-
-root.mainloop()
+    root.mainloop()
