@@ -15,7 +15,7 @@ def Submit():
     
     if Username == 'admin' and Password == '123':
         messagebox.showinfo ('Login', 'Correct Login.')
-        InfoScreen()
+        InfoScreen() #Function in Reservation_Info.py
 
         
     else:

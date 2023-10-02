@@ -4,7 +4,7 @@ import mysql.connector
 
 
 def Info():
-    dbconnection = mysql.connector.connect (host = 'localhost', username = 'root', password = 'admin', database = 'class_xii_project')
+    dbconnection = mysql.connector.connect(host = 'localhost', username = 'root', password = 'admin', database = 'class_xii_project')
     dbcursor = dbconnection.cursor()
 
     SelectQuery = 'SELECT * FROM Personal, Reservation WHERE Reservation.RegNo = Personal.RegNo'
@@ -64,4 +64,3 @@ def InfoScreen():
     Info()
 
     root.mainloop()
-
