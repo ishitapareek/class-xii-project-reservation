@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 
+from WindowStyle import *
 import mysql.connector
 
     
@@ -65,8 +66,9 @@ def InfoScreen():
     root = Tk()
     root.title ('Customer Information')
 
-    root.geometry('1300x300')
+    root.geometry('1500x500')
     root.resizable(False, False)
+    SetWindowBG(root)
 
 
     

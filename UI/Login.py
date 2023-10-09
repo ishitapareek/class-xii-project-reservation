@@ -2,9 +2,14 @@ from tkinter import *
 from tkinter import messagebox
 
 from Reservation_Info import *
+
+from WindowStyle import *
+import tkinter.font as font
+
     
 def CreateLabel(container, caption, r, c):
-    label = Label (container, text = caption)
+    label = Label(container, text = caption)
+    SetLabelStyle_Input(label)
     label.grid (row = r, column = c)
 
 
@@ -24,18 +29,19 @@ def Submit():
 
 
 
-def LoginScreen():
+def LoginScreen(Pwindow):
     global Usertxt
     global Passwordtxt
     global root
 
     
-    root = Tk()
+    root = Toplevel(Pwindow)
     root.title('Login')
 
-    root.geometry('180x75')
+    root.geometry('290x85')
     root.resizable(False, False)
 
+    SetWindowBG(root)
 
     CreateLabel (root, 'Username:', 1, 0)
 
@@ -49,6 +55,7 @@ def LoginScreen():
     
 
     Submitbtn = Button (root, text = 'Submit', command = Submit)
+    SetButtonStyle(Submitbtn)
     Submitbtn.grid (row = 3, column = 0, columnspan = 2)
 
 

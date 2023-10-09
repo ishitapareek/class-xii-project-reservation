@@ -4,9 +4,13 @@ import mysql.connector
 
 from Payment import *
 
+from WindowStyle import *
+import tkinter.font as font
+
 
 def CreateLabel(container, caption, r, c):
     label = Label (container, text = caption)
+    SetLabelStyle_Input(label)
     label.grid (row = r, column = c)
 
 def Clear():
@@ -37,11 +41,12 @@ def Save(Name, RegNo):
 
     
     dbconnection.close()
-    Layout(Name, RegNo)
+    Layout(root, Name, RegNo)
 
 
 def RoomsandActivities(Pwindow, RegNo, Name):
         
+    global root
     global clickedRooms
     global clickedActivity
     global txtParticipants
@@ -49,9 +54,11 @@ def RoomsandActivities(Pwindow, RegNo, Name):
     
     root = Toplevel(Pwindow)
     root.title('Suites & Activities')
+    SetWindowBG(root)
 
 
-    frameBooking = LabelFrame (root, text = 'Suite and Activity Booking', padx = 7, pady = 10)
+    frameBooking = LabelFrame (root, text = 'Suite and Activity Booking', font = 'Times', padx = 7, pady = 10)
+    SetFrameBG(frameBooking)
     frameBooking.grid(row = 0, column = 0, padx = 20, pady = 20)
 
 
@@ -68,11 +75,13 @@ def RoomsandActivities(Pwindow, RegNo, Name):
    
     CreateLabel (frameBooking, 'Type of Suite : ', 1, 0)
     dropRooms = OptionMenu (frameBooking, clickedRooms, 'Junior', 'Deluxe', 'Studio', 'Presidential')
+    DropStyle(dropRooms)
     dropRooms.grid(row = 1, column = 1)
 
     clickedActivity = StringVar()
     CreateLabel (frameBooking, 'Activity: ', 2, 0)
     dropActivity = OptionMenu (frameBooking, clickedActivity, 'Golf', 'Surfing', 'Rock Climbing', 'Zip Lining', 'Parachuting')
+    DropStyle(dropActivity)
     dropActivity.grid (row = 2, column = 1)
 
     CreateLabel (frameBooking, 'Number of Participants: ', 2, 2)
@@ -82,13 +91,16 @@ def RoomsandActivities(Pwindow, RegNo, Name):
 
 
     frameAction = LabelFrame (root, padx = 7, pady = 10)
+    SetFrameBG(frameAction)
     frameAction.grid(row = 1, column = 0, padx = 20, pady = 20)
        
     btnClear = Button (frameAction, text = 'Clear', command = Clear)
+    SetButtonStyle(btnClear)
     btnClear.grid(row = 0, column = 0)
 
         
     btnSubmit = Button (frameAction, text = 'Submit', command = lambda: Save (Name, RegNo))
+    SetButtonStyle(btnSubmit)
     btnSubmit.grid(row = 0, column = 1)
 
     root.mainloop()

@@ -2,7 +2,11 @@ from tkinter import *
 from tkinter import messagebox
 import mysql.connector
 
+from WindowStyle import *
 from Rooms_and_Activities import *
+
+import tkinter.font as font
+
 
 def Clear():
     txtName.delete(0, 'end')
@@ -56,12 +60,14 @@ def GetValues():
         
     
 def CreateLabel(container, caption, r, c):
-    label = Label (container, text = caption)
+    label = Label (container, text = caption, anchor = W)
+    SetLabelStyle_Input(label)
     label.grid (row = r, column = c)
 
 def MoreDetailsFrames(SuiteType, Activity, Participants, RoomNumber, Amount):
 
-    frameMoreDetails = LabelFrame(resWindow, text = 'More Details', padx = 7, pady = 10)
+    frameMoreDetails = LabelFrame(resWindow, text = 'More Details', font = 'Times', padx = 7, pady = 10)
+    SetFrameBG(frameMoreDetails)
     frameMoreDetails.grid (row = 2, column = 0, padx = 20, pady = 20)
 
     CreateLabel (frameMoreDetails, 'Suite: ', 0, 0)
@@ -86,11 +92,13 @@ def PersonalReservationFrames(Pwindow, Name, Address, DOB, Email, Mobile, Dates,
     resWindow = Toplevel(Pwindow)
 
     resWindow.title ('Reservation')
-    resWindow.geometry('600x400')
+    resWindow.geometry('630x500')
     resWindow.resizable(False, False)
+    SetWindowBG(resWindow)
 
 
-    framePersonalInfo = LabelFrame(resWindow, text = 'Personal Info', padx = 7, pady = 10)
+    framePersonalInfo = LabelFrame(resWindow, text = 'Personal Info', font = 'Times', padx = 7, pady = 10)
+    SetFrameBG(framePersonalInfo)
     framePersonalInfo.grid(row = 0, column = 0, padx = 20, pady = 20)
 
     global txtName
@@ -139,7 +147,9 @@ def PersonalReservationFrames(Pwindow, Name, Address, DOB, Email, Mobile, Dates,
     txtAddress.insert(0, Address)
 
         
-    frameReservationInfo = LabelFrame (resWindow, text = 'Reservation', padx = 7, pady = 10)
+    frameReservationInfo = LabelFrame (resWindow, text = 'Reservation', font = 'Times', padx = 7, pady = 10)
+    SetFrameBG(frameReservationInfo)
+
     frameReservationInfo.grid(row = 1, column = 0, padx = 20, pady = 20)
 
     CreateLabel (frameReservationInfo, 'Dates: ', 0, 0)
@@ -161,14 +171,15 @@ def PersonalReservationFrames(Pwindow, Name, Address, DOB, Email, Mobile, Dates,
     CreateLabel(frameReservationInfo, 'Boarding Point: ', 1, 0)
 
     dropBoarding = OptionMenu (frameReservationInfo, clickedBoarding, 'Boarding 1', 'Boarding 2', 'Boarding 3')
+    DropStyle(dropBoarding)
     dropBoarding.grid(row = 1, column = 1)
     clickedBoarding.set(Boarding)
 
 
-    lblLeaving = Label (frameReservationInfo, text = 'Leaving Point: ')
-    lblLeaving.grid(row = 1, column = 2)
+    CreateLabel(frameReservationInfo, 'Leaving Point: ', 1, 2)
 
     dropLeaving = OptionMenu (frameReservationInfo, clickedLeaving, 'Leaving 1', 'Leaving 2', 'Leaving 3')
+    DropStyle(dropLeaving)
     dropLeaving.grid(row = 1, column = 3)
     clickedLeaving.set(Leaving)
 
@@ -183,12 +194,16 @@ def NewReservation(Pwindow):
     PersonalReservationFrames(Pwindow, "", "", "", "", "", "", "", "", "", "")
 
     frameAction = LabelFrame (resWindow, padx = 7, pady = 10)
+    SetFrameBG(frameAction)
     frameAction.grid(row = 2, column = 0, padx = 20, pady = 20)
        
     btnClear = Button (frameAction, text = 'Clear', command = Clear)
+    SetButtonStyle(btnClear)
     btnClear.grid(row = 0, column = 0)
     
     btnSubmit = Button (frameAction, text = 'Submit', command = GetValues)
+    SetButtonStyle(btnSubmit)
+
     btnSubmit.grid(row = 0, column = 1)
 
 

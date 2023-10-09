@@ -1,7 +1,10 @@
 from tkinter import *
+from tkinter import messagebox
 import mysql.connector
 
-from tkinter import messagebox
+
+from WindowStyle import *
+import tkinter.font as font
 
 
 def Pricing(RegNo):
@@ -78,6 +81,7 @@ def Pricing(RegNo):
 
 def CreateLabel(container, caption, r, c):
     label = Label (container, text = caption)
+    SetLabelStyle_Input(label)
     label.grid (row = r, column = c)
 
 def Submit(RegNo, Name):
@@ -99,16 +103,18 @@ def Submit(RegNo, Name):
     messagebox.showinfo('Confirmation', Msg)
         
 
-def Layout(Name, RegNo):
+def Layout(Pwindow, Name, RegNo):
     
-    root = Tk()
-    root.geometry('500x500')
+    root = Toplevel(Pwindow)
+    root.geometry('400x450')
     root.resizable(False, False)
+    SetWindowBG(root)
 
     Pricing(RegNo)
 
-    framePrice = LabelFrame(root, text = 'Total Cost', padx = 7, pady = 10)
-    framePrice.grid (row = 0, column = 0)
+    framePrice = LabelFrame(root, text = 'Total Cost', font = 'Times', padx = 7, pady = 10)
+    SetFrameBG(framePrice)
+    framePrice.grid (row = 0, column = 0, padx = 20, pady = 20)
 
     CreateLabel (framePrice,  'Name: ', 0, 0)
     CreateLabel (framePrice, Name, 0, 1)
@@ -133,8 +139,9 @@ def Layout(Name, RegNo):
     global txtExpirationYear
     global txtExpirationMonth
 
-    frameCard = LabelFrame (root, text = 'Payment', padx = 10, pady = 10)
-    frameCard.grid (row = 1, column = 0)
+    frameCard = LabelFrame (root, text = 'Payment', font = 'Times', padx = 7, pady = 10)
+    SetFrameBG(frameCard)
+    frameCard.grid (row = 1, column = 0, padx = 20, pady = 20)
     
     CreateLabel (frameCard, 'Credit Card Number: ', 0, 0)
 
@@ -154,7 +161,15 @@ def Layout(Name, RegNo):
     txtCVV = Entry (frameCard, show = '*')
     txtCVV.grid (row = 3, column = 1)
 
-    btnSubmit = Button (frameCard, text = 'Submit', command = lambda: Submit(RegNo, Name))
-    btnSubmit.grid(row = 4, column = 0, columnspan = 2)
+
+    frameAction = LabelFrame (root, text = '', padx = 7, pady = 10)
+    SetFrameBG(frameAction)
+    frameAction.grid (row = 2, column = 0)
+    
+    btnSubmit = Button (frameAction, text = 'Submit', command = lambda: Submit(RegNo, Name))
+    SetButtonStyle(btnSubmit)
+    btnSubmit.grid(row = 0, column = 0)
 
     root.mainloop()
+
+#Layout('fsdkjfl', '52')
