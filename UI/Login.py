@@ -16,6 +16,7 @@ def Submit():
     if Username == 'admin' and Password == '123':
         messagebox.showinfo ('Login', 'Correct Login.')
         InfoScreen() #Function in Reservation_Info.py
+        root.destroy()
 
         
     else:
@@ -26,10 +27,15 @@ def Submit():
 def LoginScreen():
     global Usertxt
     global Passwordtxt
+    global root
 
     
     root = Tk()
     root.title('Login')
+
+    root.geometry('180x75')
+    root.resizable(False, False)
+
 
     CreateLabel (root, 'Username:', 1, 0)
 
@@ -47,3 +53,4 @@ def LoginScreen():
 
 
     root.mainloop()
+

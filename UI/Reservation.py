@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import messagebox
 import mysql.connector
 
+from Rooms_and_Activities import *
+
 def Clear():
     txtName.delete(0, 'end')
     txtDOB.delete(0, 'end')
@@ -29,10 +31,13 @@ def Save(Name, DOB, PhoneNo, Email, Address, Dates, Days, Boarding, Leaving, Mem
     
     dbconnection.commit()
 
-    messagebox.askquestion("Are You Sure?", "Do you want to confirm your reservation?")
 
     Msg = Name + ', your reservation has been confirmed.' + '\n \n ' + 'Your registration number is: ' + RegNo
     messagebox.showinfo('Confirmation', Msg)
+
+    RoomsandActivities(resWindow, RegNo, Name)
+
+    dbconnection.close()
 
 
 def GetValues():
@@ -54,15 +59,39 @@ def CreateLabel(container, caption, r, c):
     label = Label (container, text = caption)
     label.grid (row = r, column = c)
 
+def MoreDetailsFrames(SuiteType, Activity, Participants, RoomNumber, Amount):
 
-def DesignWindow(Pwindow, Name, Address, DOB, Email, Mobile, Dates, Days, Boarding, Leaving, Members):
-    resWindow = Toplevel (Pwindow)
+    frameMoreDetails = LabelFrame(resWindow, text = 'More Details', padx = 7, pady = 10)
+    frameMoreDetails.grid (row = 2, column = 0, padx = 20, pady = 20)
+
+    CreateLabel (frameMoreDetails, 'Suite: ', 0, 0)
+    CreateLabel (frameMoreDetails, SuiteType, 0, 1)
+
+    CreateLabel (frameMoreDetails, 'Activity: ', 1, 0)
+    CreateLabel (frameMoreDetails, Activity, 1, 1)
+
+
+    CreateLabel (frameMoreDetails, 'Participants: ', 2, 0)
+    CreateLabel (frameMoreDetails, Participants, 2, 1)
+    
+    CreateLabel (frameMoreDetails, 'Room Number: ', 3, 0)
+    CreateLabel (frameMoreDetails, RoomNumber, 3, 1)
+    
+    CreateLabel (frameMoreDetails, 'Amount: ', 4, 0)
+    CreateLabel (frameMoreDetails, Amount, 4, 1)
+
+def PersonalReservationFrames(Pwindow, Name, Address, DOB, Email, Mobile, Dates, Days, Boarding, Leaving, Members):
+    global resWindow
+    
+    resWindow = Toplevel(Pwindow)
 
     resWindow.title ('Reservation')
+    resWindow.geometry('600x400')
+    resWindow.resizable(False, False)
+
 
     framePersonalInfo = LabelFrame(resWindow, text = 'Personal Info', padx = 7, pady = 10)
     framePersonalInfo.grid(row = 0, column = 0, padx = 20, pady = 20)
-
 
     global txtName
     global txtDOB
@@ -74,6 +103,7 @@ def DesignWindow(Pwindow, Name, Address, DOB, Email, Mobile, Dates, Days, Boardi
     global clickedBoarding
     global clickedLeaving
     global txtMembers
+    global clickedActivity
 
     
     CreateLabel (framePersonalInfo, 'Name: ', 0, 0)
@@ -108,8 +138,7 @@ def DesignWindow(Pwindow, Name, Address, DOB, Email, Mobile, Dates, Days, Boardi
     txtAddress.grid (row = 2, column = 1)
     txtAddress.insert(0, Address)
 
-
-
+        
     frameReservationInfo = LabelFrame (resWindow, text = 'Reservation', padx = 7, pady = 10)
     frameReservationInfo.grid(row = 1, column = 0, padx = 20, pady = 20)
 
@@ -129,8 +158,7 @@ def DesignWindow(Pwindow, Name, Address, DOB, Email, Mobile, Dates, Days, Boardi
     clickedBoarding = StringVar()
     clickedLeaving = StringVar()
 
-    lblBoarding = Label (frameReservationInfo, text = 'Boarding Point: ')
-    lblBoarding.grid(row = 1, column = 0)
+    CreateLabel(frameReservationInfo, 'Boarding Point: ', 1, 0)
 
     dropBoarding = OptionMenu (frameReservationInfo, clickedBoarding, 'Boarding 1', 'Boarding 2', 'Boarding 3')
     dropBoarding.grid(row = 1, column = 1)
@@ -150,36 +178,33 @@ def DesignWindow(Pwindow, Name, Address, DOB, Email, Mobile, Dates, Days, Boardi
     txtMembers.grid (row = 2, column = 1)
     txtMembers.insert(0, Members)
 
+    
+def NewReservation(Pwindow):
+    PersonalReservationFrames(Pwindow, "", "", "", "", "", "", "", "", "", "")
 
     frameAction = LabelFrame (resWindow, padx = 7, pady = 10)
     frameAction.grid(row = 2, column = 0, padx = 20, pady = 20)
        
     btnClear = Button (frameAction, text = 'Clear', command = Clear)
     btnClear.grid(row = 0, column = 0)
-
-    
     
     btnSubmit = Button (frameAction, text = 'Submit', command = GetValues)
     btnSubmit.grid(row = 0, column = 1)
 
-    resWindow.mainloop()
-
-    
-def NewReservation(Pwindow):
-    DesignWindow(Pwindow, "", "", "", "", "", "", "", "", "", "")
-    
 
 def SearchReservation(Pwindow, RegNo):
     
     dbconnection = mysql.connector.connect (host = 'localhost', username = 'root', password = 'admin', database = 'class_xii_project')
     dbcursor = dbconnection.cursor()
 
-    strRegNo = str(RegNo)
+    SelectQuery = '''SELECT PER.*, Dates, Days, Boarding_Point, Leaving_Point, Members, Suite_Type, Activity, Participants, Room_Number, Amount 
+                    FROM reservation RES
+                    NATURAL JOIN personal PER
+                    NATURAL JOIN suite_and_activity SA
+                    NATURAL JOIN payment_info PAY
+                    WHERE RES.RegNo = ''' + str(RegNo)
 
-    SelectQuery = 'SELECT * FROM Personal AS P, Reservation AS R WHERE P.RegNo = R.RegNo AND P.RegNo = ' + strRegNo
     dbcursor.execute (SelectQuery)
-
-    
     Records = dbcursor.fetchall()
 
     for i in Records:
@@ -189,10 +214,19 @@ def SearchReservation(Pwindow, RegNo):
         Email = i[3]
         Mobile = i[4]
         RegNo = i[5]
-        Dates = i[7]
-        Days = i[8]
-        Boarding = i[9]
-        Leaving = i[10]
-        Members = i[11]
+        Dates = i[6]
+        Days = i[7]
+        Boarding = i[8]
+        Leaving = i[9]
+        Members = i[10]
+        SuiteType = i[11]
+        Activity = i[12]
+        Participants = i[13]
+        RoomNumber = i[14]
+        Amount = i[15]
 
-    DesignWindow(Pwindow, Name, Address, DOB, Email, Mobile, Dates, Days, Boarding, Leaving, Members)
+    PersonalReservationFrames(Pwindow, Name, Address, DOB, Email, Mobile, Dates, Days, Boarding, Leaving, Members)
+
+    MoreDetailsFrames(SuiteType, Activity, Participants, RoomNumber, Amount)
+
+    resWindow.mainloop()
