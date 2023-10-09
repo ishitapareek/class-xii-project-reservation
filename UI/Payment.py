@@ -107,8 +107,11 @@ def Layout(Pwindow, Name, RegNo):
     
     root = Toplevel(Pwindow)
     root.geometry('400x450')
+    root.title('Bermuda Cruise - Payment')
     root.resizable(False, False)
     SetWindowBG(root)
+    root.iconbitmap("doodle.ico")
+
 
     Pricing(RegNo)
 

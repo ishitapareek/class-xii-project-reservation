@@ -91,10 +91,12 @@ def PersonalReservationFrames(Pwindow, Name, Address, DOB, Email, Mobile, Dates,
     
     resWindow = Toplevel(Pwindow)
 
-    resWindow.title ('Reservation')
+    resWindow.title ('Bermuda Cruise - Reservation')
     resWindow.geometry('630x500')
     resWindow.resizable(False, False)
     SetWindowBG(resWindow)
+
+    resWindow.iconbitmap("doodle.ico")
 
 
     framePersonalInfo = LabelFrame(resWindow, text = 'Personal Info', font = 'Times', padx = 7, pady = 10)

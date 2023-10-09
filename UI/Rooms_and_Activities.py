@@ -55,6 +55,8 @@ def RoomsandActivities(Pwindow, RegNo, Name):
     root = Toplevel(Pwindow)
     root.title('Suites & Activities')
     SetWindowBG(root)
+    root.iconbitmap("doodle.ico")
+
 
 
     frameBooking = LabelFrame (root, text = 'Suite and Activity Booking', font = 'Times', padx = 7, pady = 10)

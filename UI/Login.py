@@ -36,7 +36,9 @@ def LoginScreen(Pwindow):
 
     
     root = Toplevel(Pwindow)
-    root.title('Login')
+    root.title('Bermuda Cruise - Login')
+
+    root.iconbitmap("doodle.ico")
 
     root.geometry('290x85')
     root.resizable(False, False)

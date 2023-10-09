@@ -64,11 +64,13 @@ def ColumnHeading(Text):
 
 def InfoScreen():
     root = Tk()
-    root.title ('Customer Information')
+    root.title ('Bermuda Cruise - Customer Information')
 
     root.geometry('1500x500')
     root.resizable(False, False)
     SetWindowBG(root)
+    root.iconbitmap("doodle.ico")
+
 
 
     
