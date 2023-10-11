@@ -24,33 +24,20 @@ def Info():
 
     for i in myrecords:
         Name = i[0]
-        #Address = i[1]
-        #DOB = i[2]
         Email = i[3]
         Mobile = i[4]
         RegNo = i[5]
-        #Dates = i[7]
-        #Days = i[8]
-        #Boarding = i[9]
-        #Leaving = i[10]
         Members = i[11]
         SuiteType = i[13]
         Activity = i[14]
         Participants = i[15]
         RoomNumber = i[16]
-        #Amount = i[18]
         CardNumber = i[19]
-        #ExpiryMonth = i[20]
-        #ExpiryYear = i[21]
 
-        #myTree.insert(parent = '', index = 'end', iid = ID, text = '', values = (Name, Address, DOB, Email, Mobile, RegNo, Dates, Days, Boarding, Leaving, Members,
-         #                                                                        SuiteType, Activity, Participants, RoomNumber, Amount, CardNumber, ExpiryMonth, ExpiryYear))
-        #myTree.pack(pady = 20)
          
         myTree.insert(parent = '', index = 'end', iid = ID, text = '', values = (RegNo, Name, Email, Mobile, Members,
                                                                                  SuiteType, Activity, Participants, RoomNumber, CardNumber))
         myTree.pack(pady = 20)
-
 
         ID = ID + 1
         
@@ -66,20 +53,23 @@ def InfoScreen():
     root = Tk()
     root.title ('Bermuda Cruise - Customer Information')
 
-    root.geometry('1500x500')
+    root.geometry('1350x250')
     root.resizable(False, False)
     SetWindowBG(root)
-    root.iconbitmap("doodle.ico")
-
-
-
+    root.iconbitmap('icon.ico')
     
 
     global myTree 
     myTree = ttk.Treeview(root)
-    #myTree ['columns'] = ('Name', 'Address', 'DOB', 'Email', 'Mobile', 'RegNo', 'Dates', 'Days', 'Boarding', 'Leaving', 'Members', 'Suite Type', 'Activity',
-     #                     'Participants', 'Room Number', 'Amount', 'Card Number', 'Expiry Month', 'Expiry Year')
 
+    Scrollbar = ttk.Scrollbar(root, orient = 'vertical', command = myTree.yview)
+
+    # Configure the Treeview to use the scrollbar
+    myTree.configure(yscrollcommand = Scrollbar.set)
+
+    # Place the scrollbar on the right side of the Treeview
+    Scrollbar.pack(side = 'right', fill = 'y')
+   
     myTree ['columns'] = ('RegNo', 'Name','Email', 'Mobile','Members', 'Suite Type', 'Activity',
                           'Activity Participants', 'Room Number', 'Card Number')
 
@@ -88,23 +78,15 @@ def InfoScreen():
 
     ColumnHeading('RegNo')
     ColumnHeading('Name')
-    #ColumnHeading('Address')
-    #ColumnHeading('DOB')
     ColumnHeading('Email')
     ColumnHeading('Mobile')
-    #ColumnHeading('Dates')
-    #ColumnHeading('Days')
-    #ColumnHeading('Boarding')
-    #ColumnHeading('Leaving')
     ColumnHeading('Members')
     ColumnHeading('Suite Type')
     ColumnHeading('Activity')
     ColumnHeading('Activity Participants')
     ColumnHeading('Room Number')
-    #ColumnHeading('Amount')
     ColumnHeading('Card Number')
-    #ColumnHeading('Expiry Month')
-    #ColumnHeading('Expiry Year')
+
 
     Info()
 

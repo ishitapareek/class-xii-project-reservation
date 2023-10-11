@@ -18,14 +18,12 @@ def Submit():
     Password = Passwordtxt.get()
 
     
-    if Username == 'admin' and Password == '123':
-        messagebox.showinfo ('Login', 'Correct Login.')
+    if Username == 'admin' and Password == '12345':
+        messagebox.showinfo ('Login', 'Welcome Admin.')
         InfoScreen() #Function in Reservation_Info.py
-        root.destroy()
-
         
     else:
-        messagebox.showinfo ('Login', 'Incorrect Login. \n \n Check username/password.')
+        messagebox.showinfo ('Login', 'Login Failed. \n \n Incorrect username/password.')
 
 
 
@@ -38,7 +36,7 @@ def LoginScreen(Pwindow):
     root = Toplevel(Pwindow)
     root.title('Bermuda Cruise - Login')
 
-    root.iconbitmap("doodle.ico")
+    root.iconbitmap('icon.ico')
 
     root.geometry('290x85')
     root.resizable(False, False)

@@ -26,6 +26,11 @@ def DropStyle(Drop):
     Drop ['bg'] = '#cfe1f2'
     Drop ['font'] = font.Font(family = 'berlin sans fb', size = 10, weight = 'normal')
     Drop ['width'] = 10
+
+def BasicFont(Label):
+    Label ['font'] = font.Font(family = 'Times', size = 10, weight = 'normal')
+
+
     
 
 

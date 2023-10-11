@@ -55,7 +55,7 @@ def RoomsandActivities(Pwindow, RegNo, Name):
     root = Toplevel(Pwindow)
     root.title('Suites & Activities')
     SetWindowBG(root)
-    root.iconbitmap("doodle.ico")
+    root.iconbitmap('icon.ico')
 
 
 
@@ -76,7 +76,7 @@ def RoomsandActivities(Pwindow, RegNo, Name):
     
    
     CreateLabel (frameBooking, 'Type of Suite : ', 1, 0)
-    dropRooms = OptionMenu (frameBooking, clickedRooms, 'Junior', 'Deluxe', 'Studio', 'Presidential')
+    dropRooms = OptionMenu (frameBooking, clickedRooms, 'Interior', 'Ocean View', 'Balcony', 'Presidential')
     DropStyle(dropRooms)
     dropRooms.grid(row = 1, column = 1)
 

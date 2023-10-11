@@ -36,7 +36,7 @@ def Save(Name, DOB, PhoneNo, Email, Address, Dates, Days, Boarding, Leaving, Mem
     dbconnection.commit()
 
 
-    Msg = Name + ', your reservation has been confirmed.' + '\n \n ' + 'Your registration number is: ' + RegNo
+    Msg = Name + ', your reservation has been confirmed.' + '\n \n ' + 'Your reservation number is: ' + RegNo
     messagebox.showinfo('Confirmation', Msg)
 
     RoomsandActivities(resWindow, RegNo, Name)
@@ -96,8 +96,7 @@ def PersonalReservationFrames(Pwindow, Name, Address, DOB, Email, Mobile, Dates,
     resWindow.resizable(False, False)
     SetWindowBG(resWindow)
 
-    resWindow.iconbitmap("doodle.ico")
-
+    resWindow.iconbitmap('icon.ico')
 
     framePersonalInfo = LabelFrame(resWindow, text = 'Personal Info', font = 'Times', padx = 7, pady = 10)
     SetFrameBG(framePersonalInfo)
@@ -154,7 +153,7 @@ def PersonalReservationFrames(Pwindow, Name, Address, DOB, Email, Mobile, Dates,
 
     frameReservationInfo.grid(row = 1, column = 0, padx = 20, pady = 20)
 
-    CreateLabel (frameReservationInfo, 'Dates: ', 0, 0)
+    CreateLabel (frameReservationInfo, 'Date: ', 0, 0)
 
     txtDates = Entry (frameReservationInfo)
     txtDates.grid (row = 0, column = 1)
@@ -172,7 +171,8 @@ def PersonalReservationFrames(Pwindow, Name, Address, DOB, Email, Mobile, Dates,
 
     CreateLabel(frameReservationInfo, 'Boarding Point: ', 1, 0)
 
-    dropBoarding = OptionMenu (frameReservationInfo, clickedBoarding, 'Boarding 1', 'Boarding 2', 'Boarding 3')
+    dropBoarding = OptionMenu (frameReservationInfo, clickedBoarding, 'Alaska', 'Bahamas', 'France', 'Germany',
+                               'Hong Kong', 'Japan', 'Mexico', 'Spain', 'Thailand', 'United Kingdom', 'USA')
     DropStyle(dropBoarding)
     dropBoarding.grid(row = 1, column = 1)
     clickedBoarding.set(Boarding)
@@ -180,7 +180,8 @@ def PersonalReservationFrames(Pwindow, Name, Address, DOB, Email, Mobile, Dates,
 
     CreateLabel(frameReservationInfo, 'Leaving Point: ', 1, 2)
 
-    dropLeaving = OptionMenu (frameReservationInfo, clickedLeaving, 'Leaving 1', 'Leaving 2', 'Leaving 3')
+    dropLeaving = OptionMenu (frameReservationInfo, clickedLeaving, 'Alaska', 'Bahamas', 'France', 'Germany',
+                               'Hong Kong', 'Japan', 'Mexico', 'Spain', 'Thailand', 'United Kingdom', 'USA')
     DropStyle(dropLeaving)
     dropLeaving.grid(row = 1, column = 3)
     clickedLeaving.set(Leaving)

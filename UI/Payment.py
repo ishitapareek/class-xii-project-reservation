@@ -99,7 +99,7 @@ def Submit(RegNo, Name):
 
     dbconnection.close()
 
-    Msg = Name + ', your payment has been confirmed.' 
+    Msg = Name + ', your payment has been recieved. \n \n Itinerary details will be sent via email.' 
     messagebox.showinfo('Confirmation', Msg)
         
 
@@ -110,7 +110,7 @@ def Layout(Pwindow, Name, RegNo):
     root.title('Bermuda Cruise - Payment')
     root.resizable(False, False)
     SetWindowBG(root)
-    root.iconbitmap("doodle.ico")
+    root.iconbitmap('icon.ico')
 
 
     Pricing(RegNo)
