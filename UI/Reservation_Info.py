@@ -64,10 +64,8 @@ def InfoScreen():
 
     Scrollbar = ttk.Scrollbar(root, orient = 'vertical', command = myTree.yview)
 
-    # Configure the Treeview to use the scrollbar
     myTree.configure(yscrollcommand = Scrollbar.set)
 
-    # Place the scrollbar on the right side of the Treeview
     Scrollbar.pack(side = 'right', fill = 'y')
    
     myTree ['columns'] = ('RegNo', 'Name','Email', 'Mobile','Members', 'Suite Type', 'Activity',

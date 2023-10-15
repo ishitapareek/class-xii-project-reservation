@@ -47,7 +47,7 @@ def Home():
     SetLabelStyle_Home (lblPhoto1)
     lblPhoto1.image = img1
     lblPhoto1.grid(row = 0, column = 1)
-
+    
 
 
     image2 = Image.open('lounge.jpeg')
@@ -243,4 +243,3 @@ Searchbtn.grid(row = 0, column = 5, padx = 5, pady = 10)
 Home()
 
 root.mainloop()
-

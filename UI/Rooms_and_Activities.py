@@ -53,7 +53,7 @@ def RoomsandActivities(Pwindow, RegNo, Name):
 
     
     root = Toplevel(Pwindow)
-    root.title('Suites & Activities')
+    root.title('Bermuda Cruise - Suites & Activity')
     SetWindowBG(root)
     root.iconbitmap('icon.ico')
 

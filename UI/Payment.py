@@ -45,13 +45,13 @@ def Pricing(RegNo):
 
     SuiteCost = 0
 
-    if SuiteType == 'Junior':
+    if SuiteType == 'Interior':
         SuiteCost = 1000 * int(Days)
 
-    elif SuiteType == 'Deluxe':
+    elif SuiteType == 'Ocean View':
         SuiteCost = 1200 * int(Days)
 
-    elif SuiteType == 'Studio':
+    elif SuiteType == 'Balcony':
         SuiteCost = 1500 * int(Days)
         
     elif SuiteType == 'Presidential':
@@ -174,5 +174,3 @@ def Layout(Pwindow, Name, RegNo):
     btnSubmit.grid(row = 0, column = 0)
 
     root.mainloop()
-
-#Layout('fsdkjfl', '52')
