@@ -7,7 +7,6 @@ from Rooms_and_Activities import *
 
 import tkinter.font as font
 
-
 def Clear():
     txtName.delete(0, 'end')
     txtDOB.delete(0, 'end')
@@ -23,10 +22,11 @@ def Clear():
 
 
 def Save(Name, DOB, PhoneNo, Email, Address, Dates, Days, Boarding, Leaving, Members):
-    dbconnection = mysql.connector.connect (host = 'localhost', username = 'root', password = 'admin', database = 'class_xii_project')
+    dbconnection = mysql.connector.connect (host = 'localhost', username = 'root', 
+                                            password = 'admin', database = 'class_xii_project')
     dbcursor = dbconnection.cursor()
     
-    InsertQueryPersonal = "insert into personal (Name, DOB, Mobile, Email, Address) values ('" + Name + "', '" + DOB + "', '" + PhoneNo + "', '" + Email + "', '" + Address + "')"
+    InsertQueryPersonal = "INSERT INTO Personal(Name, DOB, Mobile, Email, Address) values ('" + Name + "', '" + DOB + "', '" + PhoneNo + "', '" + Email + "', '" + Address + "')"
     dbcursor.execute (InsertQueryPersonal)
     RegNo = str(dbcursor.lastrowid)
 

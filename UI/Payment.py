@@ -2,10 +2,8 @@ from tkinter import *
 from tkinter import messagebox
 import mysql.connector
 
-
 from WindowStyle import *
 import tkinter.font as font
-
 
 def Pricing(RegNo):
 
@@ -14,12 +12,9 @@ def Pricing(RegNo):
 
     SelectQuery = 'SELECT Reservation.RegNo, Days, Members, Suite_Type, Activity, Participants from Reservation, Suite_and_Activity where Reservation.RegNo = ' + str(RegNo) + ' and Suite_and_Activity.RegNo = ' + str(RegNo)
     
-    
     dbcursor.execute (SelectQuery)
     myrecords = dbcursor.fetchall()
-
-
-    
+   
     global TicketCost
     global SuiteCost
     global ActivityCost
@@ -31,7 +26,6 @@ def Pricing(RegNo):
     global Activity
     global Participants
 
-
     for i in myrecords:
         if str(RegNo) == str(i[0]):
             Days = i[1]
@@ -41,7 +35,6 @@ def Pricing(RegNo):
             Participants = i[5]
 
     TicketCost = 30000 * int(Members)
-
 
     SuiteCost = 0
 
@@ -75,9 +68,7 @@ def Pricing(RegNo):
         ActivityCost = 900 * int(Participants)
 
     TotalCost = TicketCost + SuiteCost + ActivityCost
-
     dbconnection.close()
-
 
 def CreateLabel(container, caption, r, c):
     label = Label (container, text = caption)
@@ -96,12 +87,10 @@ def Submit(RegNo, Name):
     dbcursor.execute (InsertQuery)
 
     dbconnection.commit()
-
     dbconnection.close()
 
     Msg = Name + ', your payment has been recieved. \n \n Itinerary details will be sent via email.' 
     messagebox.showinfo('Confirmation', Msg)
-        
 
 def Layout(Pwindow, Name, RegNo):
     
@@ -111,7 +100,6 @@ def Layout(Pwindow, Name, RegNo):
     root.resizable(False, False)
     SetWindowBG(root)
     root.iconbitmap('icon.ico')
-
 
     Pricing(RegNo)
 
@@ -136,7 +124,6 @@ def Layout(Pwindow, Name, RegNo):
 
     CreateLabel (framePrice, 'Total Cost: ', 5, 0)
     CreateLabel (framePrice, TotalCost, 5, 1)
-
 
     global txtCardNumber
     global txtExpirationYear
@@ -163,7 +150,6 @@ def Layout(Pwindow, Name, RegNo):
     CreateLabel (frameCard, 'CVV: ', 3, 0)
     txtCVV = Entry (frameCard, show = '*')
     txtCVV.grid (row = 3, column = 1)
-
 
     frameAction = LabelFrame (root, text = '', padx = 7, pady = 10)
     SetFrameBG(frameAction)
